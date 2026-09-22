@@ -70,36 +70,36 @@
 
 ```mermaid
 flowchart TD
-    subgraph Client Layer [Frontend - React 19 + Tailwind v4 + Vite]
-        Portal[Entry Portal / Role Router]
-        UserApp[User Workspace: Booking, Sessions, Billing]
-        AdminApp[Admin Dashboard: Analytics, AI Vision, Zone Mgmt]
-        ChatWidget[AI Chatbot Assistant]
+    subgraph ClientLayer["Frontend Layer (React 19 + Tailwind v4 + Vite)"]
+        Portal["Entry Portal & Auth Router"]
+        UserApp["User Workspace (Booking, Sessions, Billing)"]
+        AdminApp["Admin Dashboard (Analytics, AI Vision, Zone Mgmt)"]
+        ChatWidget["AI Chatbot Assistant"]
     end
 
-    subgraph API Layer [Backend - Express 5 REST API]
-        AuthMW[JWT Auth & Role Guard]
-        AuthRouter[/api/auth]
-        ParkingRouter[/api/parking]
-        BillingRouter[/api/billing]
-        AdminRouter[/api/admin]
-        ChatbotRouter[/api/chatbot]
+    subgraph APILayer["Backend API Layer (Express 5 REST API)"]
+        AuthMW["JWT Auth & Role Guard Middleware"]
+        AuthRouter["Auth Routes (/api/auth)"]
+        ParkingRouter["Parking Routes (/api/parking)"]
+        BillingRouter["Billing Routes (/api/billing)"]
+        AdminRouter["Admin Routes (/api/admin)"]
+        ChatbotRouter["Chatbot Routes (/api/chatbot)"]
     end
 
-    subgraph Database Layer [MongoDB / Mongoose ODM]
-        Users[(Users)]
-        Zones[(Parking Zones)]
-        Slots[(Parking Slots)]
-        Sessions[(Parking Sessions)]
-        Billings[(Billing & Invoices)]
+    subgraph DBLayer["Database Layer (MongoDB + Mongoose)"]
+        Users[("Users Collection")]
+        Zones[("Parking Zones Collection")]
+        Slots[("Parking Slots Collection")]
+        Sessions[("Parking Sessions Collection")]
+        Billings[("Billing & Invoices Collection")]
     end
 
-    Client Layer -->|REST / JSON| API Layer
+    ClientLayer -->|REST / JSON| APILayer
     AuthRouter --> AuthMW
     ParkingRouter --> AuthMW
     BillingRouter --> AuthMW
     AdminRouter --> AuthMW
-    API Layer --> Database Layer
+    APILayer --> DBLayer
 ```
 
 ---
